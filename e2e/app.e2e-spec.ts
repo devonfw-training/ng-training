@@ -1,14 +1,14 @@
-import { CliTestNg4Page } from './app.po';
+import { AppVeryFirstPage } from './app.po';
 
 describe('cli-test-ng4 App', () => {
-  let page: CliTestNg4Page;
+  let page: AppVeryFirstPage;
 
   beforeEach(() => {
-    page = new CliTestNg4Page();
+    page = new AppVeryFirstPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display the app-book-details element', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Hello World!');
+    expect(page.getBookDetailsElement()).toBeDefined();
   });
 });
