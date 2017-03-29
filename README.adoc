@@ -1,0 +1,81 @@
+= https://angular.io[Angular] Training powered by http://devonfw.github.io/[devonfw]
+
+This repository contains https://angular.io[Angular] training materials:
+
+. *Slides* available https://devonfw.github.io/ng-training/[here].
+. *Code* organized as step-by-step development of a simple application. Each step is a repository branch whose name starts with a step number, e.g. `1-hello-world`, `2-simple-component`, etc.
+
+== Getting started
+
+=== Install prerequisites
+
+You need a Git client, the https://nodejs.org/[Node.js], the https://yarnpkg.com/[Yarn package manager] and the https://github.com/angular/angular-cli[Angular CLI] to make use of the project seed.
+It is highly recommended to use the following versions:
+
+* Node.js 6.9.5
+* Yarn 0.21.3
+* Angular CLI 1.0.0
+
+==== Git
+Check if you have a Git client already installed:
+
+----
+git --version
+----
+
+If your OS can not recognize this command, install Git. For details please refer to http://git-scm.com[this page].
+When installing under Windows, please make sure you check the following option:
+
+- [*] Use git from Windows command prompt
+
+==== Node.js
+
+It is highly recommended to install the https://github.com/creationix/nvm[Node Version Manager] which manages multiple active
+Node.js versions on your machine. The windows version of nvm can be found https://github.com/coreybutler/nvm-windows#installation--upgrades[here].
+Once https://github.com/creationix/nvm[nvm] installed, install the Node.js:
+
+----
+nvm install 6.9.5
+----
+
+==== Yarn
+
+Having installed Node.js (using the https://github.com/creationix/nvm[Node Version Manager]) you have also its package manager - https://www.npmjs.com/[npm] installed which can be used to install https://yarnpkg.com/[Yarn]:
+
+----
+npm install -g yarn
+----
+
+Please note that this is not the only possibility available. Please refer to the https://yarnpkg.com/en/docs/install[Yarn Installation Instructions] for more details on other possibilities.
+
+==== Angular CLI
+
+Having installed https://yarnpkg.com/[Yarn] you can install https://github.com/angular/angular-cli[Angular CLI] like this:
+
+----
+yarn global add @angular/cli
+----
+
+=== Start from _Hello World!_
+
+Clone this repository:
+
+----
+git clone -b 1-hello-world https://github.com/devonfw/ng-training.git
+----
+
+let https://yarnpkg.com/[Yarn] to install all dependencies:
+
+----
+cd ng-training
+yarn
+----
+
+and start the application:
+
+----
+ng serve --open
+----
+
+A _Hello World!_ web page should open in your default browser.
+
