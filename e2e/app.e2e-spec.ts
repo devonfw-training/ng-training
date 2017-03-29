@@ -1,4 +1,4 @@
-import { AppVeryFirstPage } from './app.po';
+import {AppVeryFirstPage} from './app.po';
 
 describe('cli-test-ng4 App', () => {
   let page: AppVeryFirstPage;
