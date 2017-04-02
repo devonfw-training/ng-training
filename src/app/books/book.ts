@@ -3,6 +3,14 @@ export class Book {
   private _authors: string;
   private _title: string;
 
+  static from(authors: string, title: string): Book {
+    const book = new Book();
+    book.authors = authors;
+    book.title = title;
+
+    return book;
+  }
+
   get id(): number {
     return this._id;
   }
