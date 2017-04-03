@@ -1,10 +1,13 @@
 export class Book {
+  static idSeq = 1;
+
   private _id: number;
   private _authors: string;
   private _title: string;
 
   static from(authors: string, title: string): Book {
     const book = new Book();
+    book.id = Book.idSeq++;
     book.authors = authors;
     book.title = title;
 

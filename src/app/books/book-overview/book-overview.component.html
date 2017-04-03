@@ -19,7 +19,7 @@
       </table>
     </div>
     <div class="col-md-4 col-sm-12">
-      <app-book-details [book]="selectedBook"></app-book-details>
+      <app-book-details [book]="selectedBook" (bookUpdate)="onBookUpdate($event)"></app-book-details>
     </div>
   </div>
 </section>
