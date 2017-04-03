@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../book';
 import {assign} from 'lodash';
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-book-overview',
@@ -11,7 +12,7 @@ export class BookOverviewComponent implements OnInit {
   public books: Book[];
   public selectedBook: Book;
 
-  constructor() {
+  constructor(private bookService: BookService) {
     this.books = [];
   }
 
@@ -24,18 +25,20 @@ export class BookOverviewComponent implements OnInit {
   }
 
   onBookUpdate(updatedBook: Book): void {
-    const booksToUpdate = this.books.filter(function (currentBook: Book) {
+    const bookToUpdate = this.books.find((currentBook: Book) => {
       return currentBook.id === updatedBook.id;
     });
-    if (booksToUpdate && booksToUpdate.length > 0) {
-      const bookToUpdate = booksToUpdate[0];
+    if (bookToUpdate) {
       assign(bookToUpdate, updatedBook);
     }
   }
 
   ngOnInit() {
-    this.books.push(Book.from('John Example', 'Some Book'));
-    this.books.push(Book.from('Joe Smith', 'Another Book'));
+    this.bookService.findAll().subscribe({
+      next: (books) => {
+        this.books = books;
+      }
+    });
   }
 
 }
