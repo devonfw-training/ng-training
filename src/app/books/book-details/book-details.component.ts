@@ -1,28 +1,32 @@
-import {Component, Input, EventEmitter, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Book} from '../book';
 import {cloneDeep} from 'lodash';
+import {BookService} from '../book.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.scss']
 })
-export class BookDetailsComponent {
-  private _book: Book;
+export class BookDetailsComponent implements OnInit {
+  book: Book;
 
-  @Output()
-  bookUpdate: EventEmitter<Book> = new EventEmitter<Book>();
-
-  @Input()
-  set book(value: Book) {
-    this._book = cloneDeep(value);
+  constructor(private bookService: BookService, private router: Router, private route: ActivatedRoute) {
+    this.book = new Book();
   }
 
-  get book(): Book {
-    return this._book;
+  ngOnInit(): void {
+    this.route.data.subscribe((data: {book: Book}) => {
+      if (data.book) {
+        this.book = data.book;
+      }
+    });
   }
 
   apply(): void {
-    this.bookUpdate.emit(this._book);
+    this.bookService.save(this.book).subscribe(() => {
+      this.router.navigate(['/book-app/books']);
+    });
   }
 }

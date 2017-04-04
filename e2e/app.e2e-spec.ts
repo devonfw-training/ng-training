@@ -7,9 +7,14 @@ describe('cli-test-ng4 App', () => {
     page = new AppVeryFirstPage();
   });
 
-  it('should display the app-book-overview and the app-book-details elements', () => {
+  it('should display the book overview dialog with book elements', () => {
     page.navigateTo();
-    expect(page.getBookOverviewElement()).toBeDefined();
-    expect(page.getBookDetailsElement()).toBeDefined();
+    expect(page.getBookOverviewElement().isPresent()).toBe(true);
+
+    page.getAuthorOfFirstBookTableRow().then(function (author) {
+      expect(author).toBe('John Example');
+    });
+
+    expect(page.getBookDetailsElement().isPresent()).toBe(false);
   });
 });

@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Book} from '../book';
 import {assign} from 'lodash';
-import {BookService} from '../book.service';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-book-overview',
@@ -10,34 +10,18 @@ import {BookService} from '../book.service';
 })
 export class BookOverviewComponent implements OnInit {
   public books: Book[];
-  public selectedBook: Book;
 
-  constructor(private bookService: BookService) {
+  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
     this.books = [];
   }
 
-  isBookSelected(book: Book): boolean {
-    return this.selectedBook === book;
-  }
-
   selectBook(book: Book): void {
-    this.selectedBook = book;
-  }
-
-  onBookUpdate(updatedBook: Book): void {
-    const bookToUpdate = this.books.find((currentBook: Book) => {
-      return currentBook.id === updatedBook.id;
-    });
-    if (bookToUpdate) {
-      assign(bookToUpdate, updatedBook);
-    }
+    this.router.navigate(['/book-app/book', book.id]);
   }
 
   ngOnInit() {
-    this.bookService.findAll().subscribe({
-      next: (books) => {
-        this.books = books;
-      }
+    this.activatedRoute.data.subscribe((data: {books: Book[]}) => {
+      this.books = data.books;
     });
   }
 

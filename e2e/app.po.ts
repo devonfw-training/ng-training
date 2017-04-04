@@ -1,4 +1,4 @@
-import { browser, element, by } from 'protractor';
+import {browser, element, by} from 'protractor';
 
 export class AppVeryFirstPage {
   navigateTo() {
@@ -11,6 +11,15 @@ export class AppVeryFirstPage {
 
   getBookOverviewElement() {
     return element(by.css('app-book-overview'));
+  }
+
+  getAuthorOfFirstBookTableRow() {
+    return element.all(by.css('app-book-overview table tr')).then(function (tableRows) {
+      if (tableRows.length > 1) {
+        const firstBookRow = tableRows[1]; // tableRows[0] is the header row
+        return firstBookRow.element((by.css('td'))).getText(); // the first <td> is the author
+      }
+    });
   }
 
   getBookDetailsElement() {
