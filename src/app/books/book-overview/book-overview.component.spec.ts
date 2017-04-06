@@ -1,7 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {BookOverviewComponent} from './book-overview.component';
 import {BookDetailsComponent} from '../book-details/book-details.component';
-import {FormsModule} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {BookService} from '../book.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
@@ -16,7 +16,7 @@ describe('BookOverviewComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [BookOverviewComponent, BookDetailsComponent],
-      imports: [FormsModule, RouterTestingModule],
+      imports: [ReactiveFormsModule, RouterTestingModule],
       providers: [
         BookService,
         { // we mock the ActivatedRoute

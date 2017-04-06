@@ -1,17 +1,17 @@
-<form #bookForm="ngForm" (submit)="apply()" [class.ng-submit]="submitted" novalidate class="container">
+<form [formGroup]="bookForm" (submit)="apply()" [class.ng-submit]="submitted" novalidate class="container">
   <div class="form-group row" [class.has-danger]="isFieldInvalid('authors')">
     <label for="authors" class="col-sm-2 col-form-label">Authors:</label>
     <div class="col-sm-10">
-      <input id="authors" name="authors" type="text" [(ngModel)]="book.authors"
-             class="form-control form-control-danger" required maxlength="15">
+      <input id="authors" formControlName="authors" type="text"
+             class="form-control form-control-danger">
       <div class="form-control-feedback">{{getErrorMessageOfField('authors')}}</div>
     </div>
   </div>
   <div class="form-group row" [class.has-danger]="isFieldInvalid('title')">
     <label for="title" class="col-sm-2 col-form-label">Title:</label>
     <div class="col-sm-10">
-      <input id="title" name="title" type="text" [(ngModel)]="book.title"
-             class="form-control form-control-danger" required maxlength="50">
+      <input id="title" formControlName="title" type="text"
+             class="form-control form-control-danger">
       <div class="form-control-feedback">{{getErrorMessageOfField('title')}}</div>
     </div>
   </div>
