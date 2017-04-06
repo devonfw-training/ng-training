@@ -1,19 +1,23 @@
-<form class="container" *ngIf="book">
-  <div class="form-group row">
-    <label for="authors" class="col-sm-4 col-form-label">Authors:</label>
-    <div class="col-sm-8">
-      <input id="authors" name="authors" type="text" [(ngModel)]="book.authors" class="form-control">
+<form #bookForm="ngForm" (submit)="apply()" [class.ng-submit]="submitted" novalidate class="container">
+  <div class="form-group row" [class.has-danger]="isFieldInvalid('authors')">
+    <label for="authors" class="col-sm-2 col-form-label">Authors:</label>
+    <div class="col-sm-10">
+      <input id="authors" name="authors" type="text" [(ngModel)]="book.authors"
+             class="form-control form-control-danger" required maxlength="15">
+      <div class="form-control-feedback">{{getErrorMessageOfField('authors')}}</div>
+    </div>
+  </div>
+  <div class="form-group row" [class.has-danger]="isFieldInvalid('title')">
+    <label for="title" class="col-sm-2 col-form-label">Title:</label>
+    <div class="col-sm-10">
+      <input id="title" name="title" type="text" [(ngModel)]="book.title"
+             class="form-control form-control-danger" required maxlength="50">
+      <div class="form-control-feedback">{{getErrorMessageOfField('title')}}</div>
     </div>
   </div>
   <div class="form-group row">
-    <label for="title" class="col-sm-4 col-form-label">Title:</label>
-    <div class="col-sm-8">
-      <input id="title" name="title" type="text" [(ngModel)]="book.title" class="form-control">
-    </div>
-  </div>
-  <div class="form-group row">
-    <div class="offset-sm-4 col-sm-8">
-      <button class="btn btn-primary" (click)="apply()">Apply</button>
+    <div class="offset-sm-2 col-sm-10">
+      <button type="submit" class="btn btn-primary">Apply</button>
     </div>
   </div>
 </form>
