@@ -347,8 +347,8 @@
             <section>
                 <h3>Http (1/2)</h3>
                 <ol>
-                    <li>Prepare the server</li>
-					<li>Adjust the proxy configuration in the <span class="highlight monospace">oasp4js.config.json</span> file</li>
+                    <li>Prepare a server of your choice :)</li>
+					<li>Add a Adjust the proxy configuration in the <span class="highlight monospace">oasp4js.config.json</span> file</li>
                 </ol>
             </section>
 			<section>
@@ -364,41 +364,42 @@
         </section>
         <section id="forms">
             <section>
-                <h3>Forms (1/5)</h3>
+                <h3>Forms (1/6)</h3>
                 <ol>
-                    <li>Go to the file <span class="highlight monospace">book-details/book-details.component.html</span>
-                        and wrap up both fields and their values with a form tag. Add a template variable
-                        <span class="highlight monospace">#bookForm="ngForm"</span> which references the fom control model.</li>
+                    <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>'s template and add a <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars" target="_blank" class="monospace">template variable</a>
+                        which references the <span class="highlight monospace">&lt;form&gt;</span>'s control model (<span class="highlight monospace">#bookForm="ngForm"</span>).</li>
                     <li>Make the apply button of type submit (<span class="highlight monospace">type="submit"</span>)
                         and move the call of <span class="highlight monospace">apply()</span> to the
                         <span class="highlight monospace">&lt;form&gt;</span>'s <span class="highlight monospace">(submit)</span> event binding.</li>
-                    <li>Add the <span class="highlight monospace">[class.ng-submit]</span> class binding to the
+                    <li>Add the <span class="highlight monospace">[class.ng-submit]</span> <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#class-binding" target="_blank" class="monospace">class binding</a> to the
                         <span class="highlight monospace">&lt;form&gt;</span>. Bind it to the
                         <span class="highlight monospace">submitted</span> flag of the <span class="highlight monospace">BookDetailsComponent</span> class
-                        (the flag will be added soon)</li>
-                </ol>
-            </section>
-            <section>
-                <h3>Forms (2/5)</h3>
-                <ol>
+                        (the flag will be added later on).</li>
                     <li>Add the <span class="highlight monospace">novalidate</span> attribute to the
                         <span class="highlight monospace">&lt;form&gt;</span> so that the HTML5 validation is off.</li>
-                    <li>Set the <span class="highlight monospace">name</span> attributes of both input fields to
-                        <span class="highlight monospace">title</span> and <span class="highlight monospace">author</span>
-                        respectively.</li>
-                    <li>Add interpolation of error messages next to the each input field:
-                        <span class="highlight monospace">{{getErrorMessageOfField(...)}}</span> passing
-                        <span class="highlight monospace">'author'</span> and <span class="highlight monospace">'title'</span> values.
-                        Wrap up the interpolation with a <span class="highlight monospace">&lt;span&gt;</span> element
-                        setting  its class to <span class="highlight monospace">error-msg</span> (needed for styling)</li>
                 </ol>
             </section>
             <section>
-                <h3>Forms (3/5)</h3>
+                <h3>Forms (2/6)</h3>
+                    <p style="text-align: justify">Based on <a href="https://v4-alpha.getbootstrap.com/components/forms/#examples" target="_blank" class="monospace">Bootstrap examples</a>
+                        implement its validation behavior; for each input field:
+                        <ul>
+                            <li>to the parent element of an input field and a label add the <span class="highlight monospace">[class.has-danger]</span> class binding to the
+                                <span class="highlight monospace">isFieldInvalid()</span> method passing a field name as an argument,</li>
+                            <li>add the <span class="highlight monospace">form-control-danger</span> class to the input field,</li>
+                            <li>add a <span class="highlight monospace">&lt;div&gt;</span> element underneath the input field with the <span class="highlight monospace">form-control-feedback</span> class.
+                                Put interpolation binding to the <span class="highlight monospace">getErrorMessageOfField()</span> method passing a field name as an argument.
+                            </li>
+                        </ul>
+                    </p>
+            </section>
+            <section>
+                <h3>Forms (3/6)</h3>
                 <ol>
-                    <li>Go to the file <span class="highlight monospace">book-details/book-details.component.ts</span>
+                    <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>
                         and add the public <span class="highlight monospace">currentForm: NgForm</span> property. Apply
-                        the <span>@ViewChild('bookForm')</span> decorator to it to bind it with the template variable
+                        the <span class="highlight monospace">@ViewChild('bookForm')</span> decorator to it to bind it with the
+                        <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars" target="_blank" class="monospace">template variable</a>
                         <span class="highlight monospace">#bookForm="ngForm"</span> (we put in the template file before).
                     </li>
                     <li>Add the public <span class="highlight monospace">submitted: boolean</span> property setting it
@@ -412,25 +413,47 @@
                 </ol>
             </section>
             <section>
-                <h3>Forms (4/5)</h3>
-                <p>Implement the method <span class="highlight monospace">getErrorMessageOfField(fieldName: string): string</span>.
-                    Use the <span class="highlight monospace">NgForm.form.get()</span> function to get form data
-                    related to a given field. The data contains an <span class="highlight monospace">errors</span>
-                    object.
-                    Iterate over its properties to check if a given error (e.g. required) occurred. The error message
-                    should only be returned if the field is invalid and either touched or the form submitted.
-                </p>
+                <h3>Forms (4/6)</h3>
+                <ol>
+                    <li>
+                        Implement the <span class="highlight monospace">getErrorMessageOfField(fieldName: string): string</span> method.
+                        Use the <span class="highlight monospace">NgForm.form.get()</span> function to get form data
+                        related to a given field. The data contains an <span class="highlight monospace">errors</span>
+                        object. Iterate over its properties to check if a given error (e.g. required) occurred. The error message
+                        should only be returned if the field is invalid and either touched or the form submitted.
+                    </li>
+                    <li>
+                        Add the <a href="https://angular.io/docs/ts/latest/api/forms/index/RequiredValidator-directive.html" target="_blank" class="monospace">required</a> and
+                        <a href="https://angular.io/docs/ts/latest/api/forms/index/MaxLengthValidator-directive.html" target="_blank" class="monospace">maxlength</a> (declarative) validators to the input fields.
+                    </li>
+                </ol>
             </section>
             <section>
-                <h3>Forms (5/5)</h3>
-                <p>Add some styling to the file <span class="highlight monospace">styles.less</span> (located in the
-                    main application directory), e.g.
-                    add a red border to input fields when they have the <span
-                            class="highlight monospace">ng-invalid</span>
-                    class and either the <span class="highlight monospace">ng-touched</span> class or the form has
-                    the the <span class="highlight monospace">ng-submitted</span> class. Use the <span class="highlight monospace">error-msg</span>
-                    class to style the error messages (e.g. set the font color to red).
-                </p>
+                <h3>(Reactive) Forms (5/6)</h3>
+                <ol>
+                    <li>Go to the <span class="highlight monospace">BooksModule</span> and replace the import of <span class="highlight monospace">FormsModule</span> with <span class="highlight monospace">ReactiveFormsModule</span></li>
+                    <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>'s template:
+                        <ul>
+                            <li>remove the template variable and add the <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroupDirective-directive.html" target="_blank" class="monospace">formGroup</a> directive's binding to the
+                                <span class="highlight monospace">BookDetailsComponent.bookForm</span> property (<span class="highlight monospace">[formGroup]="bookForm"</span>) instead,
+                                </li>
+                            <li>replace input fields' <span class="highlight monospace">name</span> attributes with <span class="highlight monospace">formControlName</span>,</li>
+                            <li>remove <span class="highlight monospace">ngModel</span> as well as validation directives (<span class="highlight monospace">required, maxlength</span>) from input fields.</li>
+                        </ul>
+                    </li>
+                </ol>
+            </section>
+            <section>
+                <h3>(Reactive) Forms (6/6)</h3>
+                <p style="text-align: justify">Go to the <span class="highlight monospace">BooksModule</span>:</p>
+                <ol>
+                    <li>replace the <span class="highlight monospace">currentForm:&nbsp;NgForm</span> with <span class="highlight monospace">bookForm:&nbsp;FormGroup</span> property</li>
+                    <li>inject the <span class="highlight monospace">FormBuilder</span> and use it in the
+                        <span class="highlight monospace">ngOnInit</span> method to build the <span class="highlight monospace">authors</span>
+                        and <span class="highlight monospace">title</span> <a href="https://angular.io/docs/ts/latest/api/forms/index/FormControl-class.html" target="_blank" class="monospace">FormControls</a>; please refer to <a href="https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#formbuilder" target="_blank">this manual</a> for an example</li>
+                    <li>Use the <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroup-class.html#!#setValue-anchor" target="_blank" class="monospace">FormGroup.setValue</a> to set from controls' values after subscribing,</li>
+                    <li>For each from control use the <span>FormControl.valueChanges</span> to subscribe to from controls' changes. Update the <span class="highlight monospace">book</span> property upon them.</li>
+                </ol>
             </section>
         </section>
     </div>
