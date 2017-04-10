@@ -7,12 +7,14 @@ import {BookService} from './book.service';
 import {RouterModule} from '@angular/router';
 import {BookDetailsResolver} from './book-details/book-details.resolver';
 import {BookOverviewResolver} from './book-overview/book-overview.resolver';
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpModule
   ],
   declarations: [BookDetailsComponent, BookOverviewComponent],
   exports: [BookDetailsComponent, BookOverviewComponent],

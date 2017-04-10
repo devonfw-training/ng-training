@@ -2,54 +2,59 @@ import {Injectable} from '@angular/core';
 import {Book} from './book';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import 'rxjs/add/operator/map';
 import {cloneDeep, assign} from 'lodash';
+import {Http, Response} from '@angular/http';
 
 @Injectable()
 export class BookService {
-  private books: Book[];
 
-  constructor() {
-    this.books = [];
-    this.books.push(Book.from('John Example', 'Some Book'));
-    this.books.push(Book.from('Joe Smith', 'Another Book'));
-  }
+  constructor(private http: Http) {}
 
   findAll(): Observable<Book[]> {
-    return Observable.create((observer: Observer<Book[]>) => {
-      observer.next(cloneDeep(this.books));
-      observer.complete();
-    });
+    return this.http.get('services/rest/books')
+      .map((response: Response) => response.json())
+      .map((booksFromServer: BookFromBackend[]) => {
+        const books = [];
+        booksFromServer.forEach((currentBook: BookFromBackend) => {
+          books.push(this.fromBackend(currentBook));
+        });
+        return cloneDeep(books);
+      });
   }
 
   findOne(id: number): Observable<Book> {
-    let bookCopy: Book;
-    const originalBook = this.books.find(book => book.id === id);
-    if (originalBook) {
-      bookCopy = cloneDeep(originalBook);
-    }
-
-    return Observable.create((observer: Observer<Book>) => {
-      if (bookCopy) {
-        observer.next(bookCopy);
-        observer.complete();
-      } else {
-        observer.error(`book with id: ${id} not found`);
-      }
-    });
+    return this.http.get('services/rest/book/' + id)
+      .map((response: Response) => response.json())
+      .map((bookFromBackend: BookFromBackend) => this.fromBackend(bookFromBackend));
   }
 
   save(bookToSave: Book): Observable<Book> {
-    let savedBook: Book;
-    if (bookToSave.id) {
-      savedBook = this.books.find(book => book.id === bookToSave.id);
-      if (savedBook) {
-        assign(savedBook, bookToSave);
-      }
-    } else {
-      savedBook = Book.from(bookToSave.authors, bookToSave.title);
-      this.books.push(savedBook);
-    }
-
-    return this.findOne(savedBook.id);
+    return this.http.post('services/rest/book', this.toBackend(bookToSave))
+      .map((response: Response) => response.json())
+      .map((bookFromBackend: BookFromBackend) => this.fromBackend(bookFromBackend));
   }
+
+  toBackend(book: Book): BookFromBackend {
+    return {
+      id: book.id,
+      authors: book.authors,
+      title: book.title
+    };
+  }
+
+  fromBackend(bookfromBackend: BookFromBackend): Book {
+    const book: Book = new Book();
+    book.id = bookfromBackend.id;
+    book.authors = bookfromBackend.authors;
+    book.title = bookfromBackend.title;
+
+    return book;
+  }
+}
+
+interface BookFromBackend {
+  id: number;
+  authors: string;
+  title: string;
 }
