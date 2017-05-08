@@ -1,15 +1,15 @@
 import {Injectable} from '@angular/core';
 import {Book} from './book';
 import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
 import 'rxjs/add/operator/map';
-import {cloneDeep, assign} from 'lodash';
+import {assign, cloneDeep} from 'lodash';
 import {Http, Response} from '@angular/http';
 
 @Injectable()
 export class BookService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) {
+  }
 
   findAll(): Observable<Book[]> {
     return this.http.get('services/rest/books')
