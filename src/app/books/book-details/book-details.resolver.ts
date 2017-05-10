@@ -17,9 +17,8 @@ export class BookDetailsResolver implements Resolve<Book> {
     if (isNaN(id)) {
       return this.navigateToNewBookDialog();
     } else {
-      return this.bookService.findOne(id).catch(() => {
-        return this.navigateToNewBookDialog();
-      });
+      return this.bookService.findOne(id)
+            .catch(() => this.navigateToNewBookDialog());
     }
   }
 

@@ -18,9 +18,8 @@ export class BookDetailsComponent implements OnInit {
   submitted: boolean;
 
   private static createErrorMessage(errorObject: {[key: string]: any}): string {
-    if (errorObject) {
-      for (const errorCode in errorObject) {
-        if (errorObject.hasOwnProperty(errorCode)) {
+    const errorMsgs:string[] = Object.keys(errorObject || {})
+      .map((errorCode) => {
           switch (errorCode) {
             case 'required':
               return 'Please provide a value';
@@ -29,12 +28,15 @@ export class BookDetailsComponent implements OnInit {
             default:
               return 'The value is wrong';
           }
-        }
-      }
-    }
+      }) ;
+      return errorMsgs && errorMsgs[0] || null;
   };
 
-  constructor(private formBuilder: FormBuilder, private bookService: BookService, private router: Router, private route: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, 
+    private bookService: BookService, 
+    private router: Router, 
+    private route: ActivatedRoute
+  ) {
     this.book = new Book();
     this.submitted = false;
   }

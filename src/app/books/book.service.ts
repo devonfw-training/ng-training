@@ -14,25 +14,20 @@ export class BookService {
   findAll(): Observable<Book[]> {
     return this.http.get('services/rest/books')
       .map((response: Response) => response.json())
-      .map((booksFromServer: BookFromBackend[]) => {
-        const books = [];
-        booksFromServer.forEach((currentBook: BookFromBackend) => {
-          books.push(this.fromBackend(currentBook));
-        });
-        return cloneDeep(books);
-      });
+      .map((booksFromServer: BookFromBackend[]) => booksFromServer.map(this.fromBackend))
+      .map((books: Book[]) => cloneDeep(books));
   }
 
   findOne(id: number): Observable<Book> {
     return this.http.get('services/rest/book/' + id)
       .map((response: Response) => response.json())
-      .map((bookFromBackend: BookFromBackend) => this.fromBackend(bookFromBackend));
+      .map(this.fromBackend);
   }
 
   save(bookToSave: Book): Observable<Book> {
     return this.http.post('services/rest/book', this.toBackend(bookToSave))
       .map((response: Response) => response.json())
-      .map((bookFromBackend: BookFromBackend) => this.fromBackend(bookFromBackend));
+      .map(this.fromBackend);
   }
 
   toBackend(book: Book): BookFromBackend {
