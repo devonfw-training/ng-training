@@ -42,7 +42,7 @@ app.post('/services/rest/book', hasBook, (req, res) => {
             Object.assign(book, updatedBook);
             res.json(book);
         } else {
-            res.status(404).json({ error: 'contact not found' });
+            res.status(404).json({ error: 'book not found' });
         }
     } else {
         const newBook = req.body;
