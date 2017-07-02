@@ -343,25 +343,6 @@
             </section>
         </section>
 
-		<section id="http">
-            <section>
-                <h3>Http (1/2)</h3>
-                <ol>
-                    <li>Prepare a server of your choice :)</li>
-					<li>Add a Adjust the proxy configuration in the <span class="highlight monospace">oasp4js.config.json</span> file</li>
-                </ol>
-            </section>
-			<section>
-                <h3>Http (2/2)</h3>
-                <ol>
-                    <li>Import the <span class="highlight monospace">HttpModule</span> into the <span class="highlight monospace">AppModule</span>, add it to the imports array</li>
-					<li>Refactor the <span class="highlight monospace">findAll()</span> books method - use <span class="highlight monospace">http.get</span></li>
-					<li>Refactor the <span class="highlight monospace">findOne(id: Number)</span> method - use <span class="highlight monospace">http.get</span></li>
-					<li>Refactor the <span class="highlight monospace">save(book: Book)</span> method  - use <span class="highlight monospace">http.post / http.put</span></li>
-					<li>Import the necessary RxJS operators to map the responses</li>
-                </ol>
-            </section>
-        </section>
         <section id="forms">
             <section>
                 <h3>Forms (1/6)</h3>
@@ -371,10 +352,6 @@
                     <li>Make the apply button of type submit (<span class="highlight monospace">type="submit"</span>)
                         and move the call of <span class="highlight monospace">apply()</span> to the
                         <span class="highlight monospace">&lt;form&gt;</span>'s <span class="highlight monospace">(submit)</span> event binding.</li>
-                    <li>Add the <span class="highlight monospace">[class.ng-submit]</span> <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#class-binding" target="_blank" class="monospace">class binding</a> to the
-                        <span class="highlight monospace">&lt;form&gt;</span>. Bind it to the
-                        <span class="highlight monospace">submitted</span> flag of the <span class="highlight monospace">BookDetailsComponent</span> class
-                        (the flag will be added later on).</li>
                     <li>Add the <span class="highlight monospace">novalidate</span> attribute to the
                         <span class="highlight monospace">&lt;form&gt;</span> so that the HTML5 validation is off.</li>
                 </ol>
@@ -453,6 +430,26 @@
                         and <span class="highlight monospace">title</span> <a href="https://angular.io/docs/ts/latest/api/forms/index/FormControl-class.html" target="_blank" class="monospace">FormControls</a>; please refer to <a href="https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#formbuilder" target="_blank">this manual</a> for an example</li>
                     <li>Use the <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroup-class.html#!#setValue-anchor" target="_blank" class="monospace">FormGroup.setValue</a> to set from controls' values after subscribing,</li>
                     <li>For each from control use the <span>FormControl.valueChanges</span> to subscribe to from controls' changes. Update the <span class="highlight monospace">book</span> property upon them.</li>
+                </ol>
+            </section>
+        </section>
+
+        <section id="http">
+            <section>
+                <h3>Http (1/2)</h3>
+                <ol>
+                    <li>Prepare a server of your choice :)</li>
+					<li>Add a Adjust the proxy configuration in the <span class="highlight monospace">oasp4js.config.json</span> file</li>
+                </ol>
+            </section>
+			<section>
+                <h3>Http (2/2)</h3>
+                <ol>
+                    <li>Import the <span class="highlight monospace">HttpModule</span> into the <span class="highlight monospace">AppModule</span>, add it to the imports array</li>
+					<li>Refactor the <span class="highlight monospace">findAll()</span> books method - use <span class="highlight monospace">http.get</span></li>
+					<li>Refactor the <span class="highlight monospace">findOne(id: Number)</span> method - use <span class="highlight monospace">http.get</span></li>
+					<li>Refactor the <span class="highlight monospace">save(book: Book)</span> method  - use <span class="highlight monospace">http.post / http.put</span></li>
+					<li>Import the necessary RxJS operators to map the responses</li>
                 </ol>
             </section>
         </section>
