@@ -3,30 +3,27 @@ import {Book} from './book';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import {assign, cloneDeep} from 'lodash';
-import {Http, Response} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable()
 export class BookService {
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
   }
 
   findAll(): Observable<Book[]> {
     return this.http.get('services/rest/books')
-      .map((response: Response) => response.json())
       .map((booksFromServer: BookFromBackend[]) => booksFromServer.map(this.fromBackend))
       .map((books: Book[]) => cloneDeep(books));
   }
 
   findOne(id: number): Observable<Book> {
     return this.http.get('services/rest/book/' + id)
-      .map((response: Response) => response.json())
       .map(this.fromBackend);
   }
 
   save(bookToSave: Book): Observable<Book> {
     return this.http.post('services/rest/book', this.toBackend(bookToSave))
-      .map((response: Response) => response.json())
       .map(this.fromBackend);
   }
 

@@ -1,29 +1,26 @@
 import { TestBed, inject, async } from '@angular/core/testing';
-import { MockBackend } from '@angular/http/testing';
 import { BookService } from './book.service';
 import { Book } from './book';
-import {
-  BaseRequestOptions, HttpModule, Http, Response, ResponseOptions
-} from '@angular/http';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
 describe('BookService', () => {
+
+  let httpMock: HttpTestingController;
+  let bookService: BookService;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpModule],
-      providers: [BookService,
-        {
-          provide: Http,
-          useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
-            return new Http(mockBackend, options);
-          },
-          deps: [MockBackend, BaseRequestOptions]
-        },
-        MockBackend,
-        BaseRequestOptions]
+      imports: [HttpClientTestingModule],
+      providers: [BookService]
     });
+
+    httpMock = TestBed.get(HttpTestingController);
+    bookService = TestBed.get(BookService);
   });
 
-  it('should find all books', async(inject([BookService, MockBackend], (service: BookService, mockBackend: MockBackend) => {
+
+
+  it('should find all books', () => {
     // given
     const mockResponse = [
       {
@@ -38,56 +35,19 @@ describe('BookService', () => {
       }
     ];
 
-    mockBackend.connections.subscribe((connection: any) => {
-      connection.mockRespond(new Response(new ResponseOptions({
-        body: JSON.stringify(mockResponse)
-      })));
-    });
-
     // when
-    service.findAll().subscribe({
+    bookService.findAll().subscribe({
       next: function (books) {
         // then
         expect(books).toBeDefined();
         expect(books.length).toBe(2);
+        expect(books[0].title).toBe('title1');
+        expect(books[1].title).toBe('title2');
       }
     });
-  })));
 
-  it('should save a book', async(inject([BookService], (service: BookService) => {
-    // given
-    const book = new Book();
-    book.authors = 'Test Author';
-    book.title = 'Test Title';
-    // when
-    service.save(book).subscribe({
-      next: function (savedBook: Book) {
-        // then
-        expect(savedBook).toBeDefined();
-        expect(savedBook.authors).toBe('Test Author');
-        expect(savedBook.title).toBe('Test Title');
-      }
-    });
-  })));
+    httpMock.expectOne('services/rest/books').flush(mockResponse);
 
-  it('should save a book and find it', async(inject([BookService], (service: BookService) => {
-    // given
-    const book = new Book();
-    book.authors = 'Test Author';
-    book.title = 'Test Title';
-    service.save(book).subscribe({
-      next: function (savedBook: Book) {
-        expect(savedBook).toBeDefined();
-        // when
-        service.findOne(savedBook.id).subscribe({
-          next: function (foundBook: Book) {
-            // then
-            expect(foundBook).toBeDefined();
-            expect(foundBook.authors).toBe('Test Author');
-            expect(foundBook.title).toBe('Test Title');
-          }
-        });
-      }
-    });
-  })));
+    httpMock.verify();
+  });
 });
