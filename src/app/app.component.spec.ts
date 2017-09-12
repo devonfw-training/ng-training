@@ -1,12 +1,13 @@
-import {Location} from '@angular/common';
-import {TestBed, async, fakeAsync, tick, ComponentFixture} from '@angular/core/testing';
-import {AppComponent} from './app.component';
-import {BooksModule} from './books/books.module';
-import {RouterTestingModule} from '@angular/router/testing';
-import {appRoutes} from './app-routing.module';
-import {Router} from '@angular/router';
-import {BookService} from './books/book.service';
-import {Book} from './books/book';
+import { Observable } from 'rxjs/Observable';
+import { Location } from '@angular/common';
+import { TestBed, async, fakeAsync, tick, ComponentFixture } from '@angular/core/testing';
+import { AppComponent } from './app.component';
+import { BooksModule } from './books/books.module';
+import { RouterTestingModule } from '@angular/router/testing';
+import { appRoutes } from './app-routing.module';
+import { Router } from '@angular/router';
+import { BookService } from './books/book.service';
+import { Book } from './books/book';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -14,7 +15,12 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      imports: [BooksModule, RouterTestingModule.withRoutes(appRoutes)]
+      imports: [BooksModule, RouterTestingModule.withRoutes(appRoutes)],
+      providers: [{
+        provide: BookService, useValue: {
+          findAll: jasmine.createSpy('spy').and.returnValue(Observable.of([Book.from('authors', 'title')]))
+        }
+      }]
     }).compileComponents();
   }));
 

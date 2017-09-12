@@ -1,18 +1,53 @@
-import {TestBed, inject, async} from '@angular/core/testing';
-
-import {BookService} from './book.service';
-import {Book} from './book';
+import { TestBed, inject, async } from '@angular/core/testing';
+import { MockBackend } from '@angular/http/testing';
+import { BookService } from './book.service';
+import { Book } from './book';
+import {
+  BaseRequestOptions, HttpModule, Http, Response, ResponseOptions
+} from '@angular/http';
 
 describe('BookService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [BookService]
+      imports: [HttpModule],
+      providers: [BookService,
+        {
+          provide: Http,
+          useFactory: (mockBackend: MockBackend, options: BaseRequestOptions) => {
+            return new Http(mockBackend, options);
+          },
+          deps: [MockBackend, BaseRequestOptions]
+        },
+        MockBackend,
+        BaseRequestOptions]
     });
   });
 
-  it('should find all books', async(inject([BookService], (service: BookService) => {
+  it('should find all books', async(inject([BookService, MockBackend], (service: BookService, mockBackend: MockBackend) => {
+    // given
+    const mockResponse = [
+      {
+        id: 1,
+        title: 'title1',
+        authors: 'authors1'
+      },
+      {
+        id: 2,
+        title: 'title2',
+        authors: 'authors2'
+      }
+    ];
+
+    mockBackend.connections.subscribe((connection: any) => {
+      connection.mockRespond(new Response(new ResponseOptions({
+        body: JSON.stringify(mockResponse)
+      })));
+    });
+
+    // when
     service.findAll().subscribe({
       next: function (books) {
+        // then
         expect(books).toBeDefined();
         expect(books.length).toBe(2);
       }
