@@ -12,7 +12,7 @@ describe('cli-test-ng4 App', () => {
     expect(page.getBookOverviewElement().isPresent()).toBe(true);
 
     page.getAuthorOfFirstBookTableRow().then(function (author) {
-      expect(author).toBe('John Example');
+      expect(author).toBe('Douglas Crockford');
     });
 
     expect(page.getBookDetailsElement().isPresent()).toBe(false);
