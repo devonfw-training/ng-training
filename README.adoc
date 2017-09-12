@@ -9,7 +9,7 @@ This repository contains https://angular.io[Angular] training materials:
 
 === Install prerequisites
 
-You need a Git client, the https://nodejs.org/[Node.js], the https://yarnpkg.com/[Yarn package manager] and the https://github.com/angular/angular-cli[Angular CLI] to make use of the project seed.
+You need a Git client, the https://nodejs.org/[Node.js] and the https://github.com/angular/angular-cli[Angular CLI] to make use of the project seed.
 It is highly recommended to use the following versions:
 
 * Node.js 6.11.2
@@ -38,7 +38,7 @@ nvm install 6.11.2
 nvm use 6.11.2
 ----
 
-==== Yarn
+==== Updating Node Package Manager
 
 Having installed Node.js (using the https://github.com/creationix/nvm[Node Version Manager]) you have also its package manager - https://www.npmjs.com/[npm] installed.
 It is recommended to update the Node Package Manager to use its latest features (like version lock file).
