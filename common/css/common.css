@@ -41,6 +41,10 @@
     display: flex;
 }
 
+.devon.reveal .tables-of-content > div:first-child {
+    width: 55%;
+}
+
 html .reveal section .max-height-unset {
     max-height: unset;
 }
