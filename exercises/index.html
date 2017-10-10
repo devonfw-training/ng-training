@@ -345,19 +345,19 @@
 
         <section id="forms">
             <section>
-                <h3>Forms (1/6)</h3>
-                <ol>
+                <h3>Forms (1/7)</h3>
+                <ul>
                     <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>'s template and add a <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars" target="_blank" class="monospace">template variable</a>
                         which references the <span class="highlight monospace">&lt;form&gt;</span>'s control model (<span class="highlight monospace">#bookForm="ngForm"</span>).</li>
                     <li>Make the apply button of type submit (<span class="highlight monospace">type="submit"</span>)
                         and move the call of <span class="highlight monospace">apply()</span> to the
-                        <span class="highlight monospace">&lt;form&gt;</span>'s <span class="highlight monospace">(submit)</span> event binding.</li>
+                        <span class="highlight monospace">&lt;form&gt;</span>'s <span class="highlight monospace">(ngSubmit)</span> event binding.</li>
                     <li>Add the <span class="highlight monospace">novalidate</span> attribute to the
                         <span class="highlight monospace">&lt;form&gt;</span> so that the HTML5 validation is off.</li>
-                </ol>
+                </ul>
             </section>
             <section>
-                <h3>Forms (2/6)</h3>
+                <h3>Forms (2/7)</h3>
                     <p style="text-align: justify">Based on <a href="https://v4-alpha.getbootstrap.com/components/forms/#examples" target="_blank" class="monospace">Bootstrap examples</a>
                         implement its validation behavior; for each input field:
                         <ul>
@@ -371,43 +371,40 @@
                     </p>
             </section>
             <section>
-                <h3>Forms (3/6)</h3>
-                <ol>
+                <h3>Forms (3/7)</h3>
+                <ul>
                     <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>
                         and add the public <span class="highlight monospace">currentForm: NgForm</span> property. Apply
                         the <span class="highlight monospace">@ViewChild('bookForm')</span> decorator to it to bind it with the
                         <a href="https://angular.io/docs/ts/latest/guide/template-syntax.html#!#ref-vars" target="_blank" class="monospace">template variable</a>
                         <span class="highlight monospace">#bookForm="ngForm"</span> (we put in the template file before).
                     </li>
-                    <li>Add the public <span class="highlight monospace">submitted: boolean</span> property setting it
-                        initially to <span class="highlight monospace">false</span>. Once the <span class="highlight monospace">apply()</span> method is called,
-                        set the flag to <span class="highlight monospace">true</span>.
-                    </li>
                     <li>Add an if-condition to the <span class="highlight monospace">apply()</span> method so that
                         all actions (such as saving a book and going back to the book overview dialog) are executed only
                         if our form (<span class="highlight monospace">currentForm.form</span>) is valid.
                     </li>
-                </ol>
+                </ul>
             </section>
             <section>
-                <h3>Forms (4/6)</h3>
-                <ol>
+                <h3>Forms (4/7)</h3>
+                <ul>
                     <li>
                         Implement the <span class="highlight monospace">getErrorMessageOfField(fieldName: string): string</span> method.
                         Use the <span class="highlight monospace">NgForm.form.get()</span> function to get form data
                         related to a given field. The data contains an <span class="highlight monospace">errors</span>
                         object. Iterate over its properties to check if a given error (e.g. required) occurred. The error message
-                        should only be returned if the field is invalid and either touched or the form submitted.
+                        should only be returned if the field is invalid and either touched or the form is submitted (use the submitted flag 
+                        from the form object: <span class="highlight monospace">this.currentForm.submitted</span>).
                     </li>
                     <li>
                         Add the <a href="https://angular.io/docs/ts/latest/api/forms/index/RequiredValidator-directive.html" target="_blank" class="monospace">required</a> and
                         <a href="https://angular.io/docs/ts/latest/api/forms/index/MaxLengthValidator-directive.html" target="_blank" class="monospace">maxlength</a> (declarative) validators to the input fields.
                     </li>
-                </ol>
+                </ul>
             </section>
             <section>
-                <h3>(Reactive) Forms (5/6)</h3>
-                <ol>
+                <h3>(Reactive) Forms (5/7)</h3>
+                <ul>
                     <li>Go to the <span class="highlight monospace">BooksModule</span> and replace the import of <span class="highlight monospace">FormsModule</span> with <span class="highlight monospace">ReactiveFormsModule</span></li>
                     <li>Go to the <span class="highlight monospace">BookDetailsComponent</span>'s template:
                         <ul>
@@ -418,19 +415,28 @@
                             <li>remove <span class="highlight monospace">ngModel</span> as well as validation directives (<span class="highlight monospace">required, maxlength</span>) from input fields.</li>
                         </ul>
                     </li>
-                </ol>
+                </ul>
             </section>
             <section>
-                <h3>(Reactive) Forms (6/6)</h3>
-                <p style="text-align: justify">Go to the <span class="highlight monospace">BooksModule</span>:</p>
-                <ol>
+                <h3>(Reactive) Forms (6/7)</h3>
+                <ul>
                     <li>replace the <span class="highlight monospace">currentForm:&nbsp;NgForm</span> with <span class="highlight monospace">bookForm:&nbsp;FormGroup</span> property</li>
+                    <li>Add the public <span class="highlight monospace">submitted: boolean</span> property setting it
+                        initially to <span class="highlight monospace">false</span>. Once the <span class="highlight monospace">apply()</span> method is called,
+                        set the flag to <span class="highlight monospace">true</span>. Replace the usages of <span class="highlight monospace">this.currentForm.submitted</span>
+                         with the <span class="highlight monospace">submitted</span> flag.
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h3>(Reactive) Forms (7/7)</h3>
+                <ul>
                     <li>inject the <span class="highlight monospace">FormBuilder</span> and use it in the
                         <span class="highlight monospace">ngOnInit</span> method to build the <span class="highlight monospace">authors</span>
                         and <span class="highlight monospace">title</span> <a href="https://angular.io/docs/ts/latest/api/forms/index/FormControl-class.html" target="_blank" class="monospace">FormControls</a>; please refer to <a href="https://angular.io/docs/ts/latest/guide/reactive-forms.html#!#formbuilder" target="_blank">this manual</a> for an example</li>
                     <li>Use the <a href="https://angular.io/docs/ts/latest/api/forms/index/FormGroup-class.html#!#setValue-anchor" target="_blank" class="monospace">FormGroup.setValue</a> to set from controls' values after subscribing,</li>
                     <li>For each from control use the <span>FormControl.valueChanges</span> to subscribe to from controls' changes. Update the <span class="highlight monospace">book</span> property upon them.</li>
-                </ol>
+                </ul>
             </section>
         </section>
 
