@@ -99,7 +99,7 @@ describe('BookService', () => {
           error => fail('should find all books after update')
         );
       },
-      error => fail('updading a book should not fail')
+      error => fail('updating a book should not fail')
     )
   })
 
