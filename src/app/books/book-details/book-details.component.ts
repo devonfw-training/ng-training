@@ -22,7 +22,7 @@ export class BookDetailsComponent implements OnInit {
         switch (errorCode) {
           case 'required':
             return 'Please provide a value';
-          case 'minlength':
+          case 'maxlength':
             return 'The value is too long';
           default:
             return 'The value is wrong';
