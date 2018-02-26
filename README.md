@@ -1,28 +1,70 @@
-# CliTestNg4
+= https://angular.io[Angular] Training powered by http://devonfw.github.io/[devonfw]
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.0.
+This repository contains https://angular.io[Angular] training materials:
 
-## Development server
+. *Slides* available https://devonfw.github.io/ng-training/[here].
+. *Code* organized as step-by-step development of a simple application. Each step is a repository branch whose name starts with a step number, e.g. `1-hello-world`, `2-simple-component`, etc.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+== Getting started
 
-## Code scaffolding
+=== Install prerequisites
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class/module`.
+You need a Git client, the https://nodejs.org/[Node.js] and the https://github.com/angular/angular-cli[Angular CLI] to make use of the project seed.
+It is highly recommended to use the following versions:
 
-## Build
+* Node.js 8.9.4
+* Angular CLI 1.7.1
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+==== Git
+Check if you have a Git client already installed:
 
-## Running unit tests
+----
+git --version
+----
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+If your OS can not recognize this command, install Git. For details please refer to http://git-scm.com[this page].
+When installing under Windows, please make sure you check the following option:
 
-## Running end-to-end tests
+- [*] Use git from Windows command prompt
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+==== Node.js
 
-## Further help
+It is highly recommended to install the https://github.com/creationix/nvm[Node Version Manager] which manages multiple active
+Node.js versions on your machine. The windows version of nvm can be found https://github.com/coreybutler/nvm-windows#installation--upgrades[here].
+Once https://github.com/creationix/nvm[nvm] installed, install the Node.js:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+----
+nvm install 8.9.4
+nvm use 8.9.4
+----
+
+==== Angular CLI
+
+Having https://www.npmjs.com/[npm] installed you can install https://github.com/angular/angular-cli[Angular CLI] like this:
+
+----
+npm install -g @angular/cli@1.7.1
+----
+
+=== Start from _Hello World!_
+
+Clone this repository:
+
+----
+git clone -b 1-hello-world https://github.com/devonfw/ng-training.git
+----
+
+let https://www.npmjs.com/[npm] to install all dependencies:
+
+----
+cd ng-training
+npm install
+----
+
+and start the application:
+
+----
+ng serve --open
+----
+
+A _Hello World!_ web page should open in your default browser.
