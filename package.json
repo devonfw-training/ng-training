@@ -1,5 +1,5 @@
 {
-  "name": "cli-test-ng4",
+  "name": "ng-training",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -21,13 +21,14 @@
     "@angular/platform-browser": "^5.2.0",
     "@angular/platform-browser-dynamic": "^5.2.0",
     "@angular/router": "^5.2.0",
-    "bootstrap": "4.0.0-alpha.6",
+    "bootstrap": "4.0.0",
     "core-js": "^2.4.1",
-    "rxjs": "^5.4.2",
+    "lodash": "^4.17.5",
+    "rxjs": "^5.5.6",
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular/cli": "~1.7.0",
+    "@angular/cli": "~1.7.1",
     "@angular/compiler-cli": "^5.2.0",
     "@angular/language-service": "^5.2.0",
     "@types/jasmine": "~2.8.3",
