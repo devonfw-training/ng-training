@@ -29,7 +29,7 @@ export class BookDetailsComponent implements OnInit {
         }
       }).join(' ');
     }
-  };
+  }
 
   constructor(private bookService: BookService, private router: Router, private route: ActivatedRoute) {
     this.book = new Book();
