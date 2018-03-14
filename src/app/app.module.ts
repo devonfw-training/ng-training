@@ -12,7 +12,6 @@ import {appRoutes} from './app-routing.module';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     BooksModule,
     RouterModule.forRoot(appRoutes)
   ],
