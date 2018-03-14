@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {Book} from '../book';
-import {cloneDeep} from 'lodash';
-import {BookService} from '../book.service';
-import {Router, ActivatedRoute} from '@angular/router';
-import {AbstractControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { Book } from '../book';
+import { cloneDeep } from 'lodash';
+import { BookService } from '../book.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-book-details',
@@ -17,24 +17,24 @@ export class BookDetailsComponent implements OnInit {
 
   submitted: boolean;
 
-  private static createErrorMessage(errorObject: {[key: string]: any}): string {
-    const errorMsgs:string[] = Object.keys(errorObject || {})
-      .map((errorCode) => {
-          switch (errorCode) {
-            case 'required':
-              return 'Please provide a value';
-            case 'maxlength':
-              return 'The value is too long';
-            default:
-              return 'The value is wrong';
-          }
-      }) ;
-      return errorMsgs && errorMsgs[0] || null;
-  };
+  private static createErrorMessage(errorObject: { [key: string]: any }): string {
+    if (errorObject) {
+      return Object.keys(errorObject).map(errorCode => {
+        switch (errorCode) {
+          case 'required':
+            return 'Please provide a value';
+          case 'maxlength':
+            return 'The value is too long';
+          default:
+            return 'The value is wrong';
+        }
+      }).join(' ');
+    }
+  }
 
-  constructor(private formBuilder: FormBuilder, 
-    private bookService: BookService, 
-    private router: Router, 
+  constructor(private formBuilder: FormBuilder,
+    private bookService: BookService,
+    private router: Router,
     private route: ActivatedRoute
   ) {
     this.book = new Book();
@@ -59,7 +59,7 @@ export class BookDetailsComponent implements OnInit {
       title: ['', [Validators.required, Validators.maxLength(50)]]
     });
 
-    this.route.data.subscribe((data: {book: Book}) => {
+    this.route.data.subscribe((data: { book: Book }) => {
       if (data.book) {
         this.book = data.book;
 
