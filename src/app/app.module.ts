@@ -11,7 +11,6 @@ import {BooksModule} from './books/books.module';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
     BooksModule
   ],
   providers: [],
