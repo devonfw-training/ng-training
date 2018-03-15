@@ -17,22 +17,20 @@ export class BookDetailsComponent implements OnInit {
 
   submitted: boolean;
 
-  private static createErrorMessage(errorObject: {[key: string]: any}): string {
+  private static createErrorMessage(errorObject: { [key: string]: any }): string {
     if (errorObject) {
-      for (const errorCode in errorObject) {
-        if (errorObject.hasOwnProperty(errorCode)) {
-          switch (errorCode) {
-            case 'required':
-              return 'Please provide a value';
-            case 'maxlength':
-              return 'The value is too long';
-            default:
-              return 'The value is wrong';
-          }
+      return Object.keys(errorObject).map(errorCode => {
+        switch (errorCode) {
+          case 'required':
+            return 'Please provide a value';
+          case 'maxlength':
+            return 'The value is too long';
+          default:
+            return 'The value is wrong';
         }
-      }
+      }).join(' ');
     }
-  };
+  }
 
   constructor(private formBuilder: FormBuilder, private bookService: BookService, private router: Router, private route: ActivatedRoute) {
     this.book = new Book();
