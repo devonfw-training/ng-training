@@ -1,10 +1,10 @@
-import {Resolve, ActivatedRouteSnapshot, Router} from '@angular/router';
-import {Book} from '../book';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/observable/throw';
-import {BookService} from '../book.service';
-import {Injectable} from '@angular/core';
+import { Resolve, ActivatedRouteSnapshot, Router } from '@angular/router';
+import { Book } from '../book';
+import { Observable } from 'rxjs/Observable';
+import { BookService } from '../book.service';
+import { Injectable } from '@angular/core';
+import { _throw } from 'rxjs/observable/throw';
+import { catchError } from 'rxjs/operators';
 
 @Injectable()
 export class BookDetailsResolver implements Resolve<Book> {
@@ -17,14 +17,16 @@ export class BookDetailsResolver implements Resolve<Book> {
     if (isNaN(id)) {
       return this.navigateToNewBookDialog();
     } else {
-      return this.bookService.findOne(id).catch(() => {
-        return this.navigateToNewBookDialog();
-      });
+      return this.bookService.findOne(id).pipe(
+        catchError(() => {
+          return this.navigateToNewBookDialog();
+        })
+      );
     }
   }
 
   private navigateToNewBookDialog() {
     this.router.navigate(['/book-app/book']);
-    return Observable.throw('Book could not be found');
+    return _throw('Book could not be found');
   }
 }
