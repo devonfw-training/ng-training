@@ -100,8 +100,8 @@ describe('BookService', () => {
         );
       },
       error => fail('updating a book should not fail')
-    )
-  })
+    );
+  });
 
   it('should find a book', () => {
     // given
