@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs/Observable';
+import { of as observableOf } from 'rxjs';
 import { Location } from '@angular/common';
 import { TestBed, async, fakeAsync, tick, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
@@ -18,7 +18,7 @@ describe('AppComponent', () => {
       imports: [BooksModule, RouterTestingModule.withRoutes(appRoutes)],
       providers: [{
         provide: BookService, useValue: {
-          findAll: jasmine.createSpy('spy').and.returnValue(Observable.of([Book.from('authors', 'title')]))
+          findAll: jasmine.createSpy('spy').and.returnValue(observableOf([Book.from('authors', 'title')]))
         }
       }]
     }).compileComponents();
