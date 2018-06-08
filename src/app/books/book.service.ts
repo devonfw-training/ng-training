@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Book} from './book';
-import {Observable} from 'rxjs/Observable';
-import {Observer} from 'rxjs/Observer';
+import {Observable, Observer} from 'rxjs';
 import {cloneDeep, assign} from 'lodash';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BookService {
   private books: Book[];
 
