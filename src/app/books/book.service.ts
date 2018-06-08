@@ -1,11 +1,13 @@
-import { Injectable } from '@angular/core';
-import { Book } from './book';
-import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
-import { assign, cloneDeep } from 'lodash';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Book} from './book';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {assign, cloneDeep} from 'lodash';
+import {HttpClient} from '@angular/common/http';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class BookService {
 
   constructor(private http: HttpClient) {
@@ -21,7 +23,7 @@ export class BookService {
   findOne(id: number): Observable<Book> {
     return this.http.get('services/rest/book/' + id).pipe(
       map(this.fromBackend)
-    )
+    );
   }
 
   save(bookToSave: Book): Observable<Book> {
