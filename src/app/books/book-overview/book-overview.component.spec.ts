@@ -5,8 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {BookService} from '../book.service';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ActivatedRoute} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
+import {of as observableOf} from 'rxjs';
 import {Book} from '../book';
 
 describe('BookOverviewComponent', () => {
@@ -21,7 +20,7 @@ describe('BookOverviewComponent', () => {
         BookService,
         { // we mock the ActivatedRoute
           provide: ActivatedRoute, useValue: {
-          data: Observable.of(
+          data: observableOf(
             {books: [Book.from('Test Author', 'Test Title')]})
         }
         }]
