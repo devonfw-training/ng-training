@@ -13,7 +13,7 @@ You need a Git client, the https://nodejs.org/[Node.js] and the https://github.c
 It is highly recommended to use the following versions:
 
 * Node.js 8.9.4
-* Angular CLI 1.7.1
+* Angular CLI 6.0.8
 
 ==== Git
 Check if you have a Git client already installed:
@@ -43,7 +43,13 @@ nvm use 8.9.4
 Having https://www.npmjs.com/[npm] installed you can install https://github.com/angular/angular-cli[Angular CLI] like this:
 
 ----
-npm install -g @angular/cli@1.7.1
+npm install -g @angular/cli@6.0.8
+----
+
+Set https://www.npmjs.com/[npm] as a package manager (https://yarnpkg.com[yarn] is the default):
+
+----
+ng config -g cli.packageManager npm
 ----
 
 === Start from _Hello World!_
