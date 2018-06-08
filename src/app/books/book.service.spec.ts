@@ -56,7 +56,7 @@ describe('BookService', () => {
       authors: 'authors1'
     };
 
-    //when
+    // when
     bookService.findOne(bookId).subscribe(book => {
       // then
       expect(book).toBeDefined();
