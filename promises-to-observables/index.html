@@ -349,11 +349,11 @@ obs.subscribe(n => console.log('This is number ', n));</code></pre>
             <section>
                 <h3>Using map() operator</h3>
                 <pre class="typescript"><code>import { of } from 'rxjs'; 
-                    import { map } from 'rxjs/operators'; 
-                    
-                    let obs = of(1, 2, 3)
-                        .pipe(map(n => n * n))
-                        .subscribe(n => console.log('This is number ', n));</code></pre>
+import { map } from 'rxjs/operators'; 
+
+let obs = of(1, 2, 3)
+    .pipe(map(n => n * n))
+    .subscribe(n => console.log('This is number ', n));</code></pre>
                 <ul class="list-style-none font-style-italic">
                     <li>This is number 1</li>
                     <li>This is number 4</li>
@@ -373,30 +373,30 @@ obs.subscribe(n => console.log('This is number ', n));</code></pre>
                 <div class="side-by-side">
                     <div>
                         <pre class="typescript"><code>import { of } from 'rxjs';
-                            import { map } from 'rxjs/operators';
-                            
-                            of(2, 3).pipe(
-                                map(n => {
-                                    let result = n * n;
-                                    console.log(`mapping ${n} to ${result}`);
-                                    return result;
-                                }),
-                            );</code></pre>
+import { map } from 'rxjs/operators';
+
+of(2, 3).pipe(
+    map(n => {
+        let result = n * n;
+        console.log(`mapping ${n} to ${result}`);
+        return result;
+    }),
+);</code></pre>
                         <p>... leads to no output.</p>
                     </div>
                     <div>
                         <pre class="typescript"><code>import { of } from 'rxjs';
-                            import { map } from 'rxjs/operators';
-                            
-                            of(2, 3)
-                                .pipe(
-                                    map(n => {
-                                        let result = n * n;
-                                        console.log(`mapping ${n} to ${result}`);
-                                        return result;
-                                    }),
-                                )
-                                .subscribe(n => console.log('This is number ', n));</code></pre>
+import { map } from 'rxjs/operators';
+
+of(2, 3)
+    .pipe(
+        map(n => {
+            let result = n * n;
+            console.log(`mapping ${n} to ${result}`);
+            return result;
+        }),
+    )
+    .subscribe(n => console.log('This is number ', n));</code></pre>
                         <ul class="list-style-none font-style-italic">
                             <li>mapping 2 to 4</li>
                             <li>This is number 4</li>
