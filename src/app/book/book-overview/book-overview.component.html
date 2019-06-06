@@ -1,0 +1,32 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Author</th>
+          <th scope="col">Title</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let book of books;let i = index"
+            [attr.aria-label]="book.title"
+            (click)="selectBook(book)"
+            [ngClass]="{'table-active': isBookSelected(book)}">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{book.author}}</td>
+          <td>{{book.title}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-sm-4">
+      <app-book-details *ngIf="selectedBook"
+                        [book]="selectedBook"></app-book-details>
+    </div>
+  </div>
+</div>
+
+
+
