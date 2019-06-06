@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { Book } from '../book';
+import { ActivatedRoute } from '@angular/router';
+import { BookService } from '../services/book.service';
+import { map, switchMap, tap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-book-details',
@@ -7,15 +11,24 @@ import { Book } from '../book';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent {
-  @Input()
-  book: Book;
+  // book: Book;
+  book$: Observable<Book>;
+  private currentBookId;
 
-  @Output()
-  bookChange = new EventEmitter<Book>();
+  constructor(
+    route: ActivatedRoute,
+    private readonly bookService: BookService) {
+    this.book$ = route.params
+      .pipe(
+        map(params => +params.bookId),
+        switchMap(bookId => bookService.getOne(bookId)),
+        tap(book => this.currentBookId = book.id)
+      );
+  }
 
   submit(newAuthor: string, newTitle: string) {
-    this.bookChange.emit({
-      ...this.book,
+    console.log({
+      id: this.currentBookId,
       title: newTitle,
       author: newAuthor
     });

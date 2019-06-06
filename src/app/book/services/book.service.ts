@@ -19,6 +19,13 @@ export class BookService {
     }];
 
   constructor() {
+    console.log('from Constr');
+  }
+
+  getOne(bookId: number): Observable<Book | undefined> {
+    const foundBook = this.books.find(
+      book => book.id === bookId);
+    return of(foundBook);
   }
 
   getAll(): Observable<Book[]> {
@@ -28,7 +35,8 @@ export class BookService {
         subscriber.complete();
       }, 2000);
     });
-
-    // return of(this.books);
+    //
+    // return of(this.books)
+    //   .pipe(delay(2000));
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Book } from '../book';
 import { BookService } from '../services/book.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-book-overview',
@@ -9,11 +10,11 @@ import { BookService } from '../services/book.service';
 })
 export class BookOverviewComponent implements OnInit, OnDestroy {
   books: Book[];
-  selectedBook: Book;
 
   private subscription;
 
-  constructor(private readonly bookService: BookService) {
+  constructor(private readonly bookService: BookService,
+              private readonly router: Router) {
     this.books = [];
   }
 
@@ -22,20 +23,8 @@ export class BookOverviewComponent implements OnInit, OnDestroy {
       .subscribe(books => this.books = books);
   }
 
-  selectBook(book: Book) {
-    this.selectedBook = book;
-    console.log(this.selectedBook);
-  }
-
-  isBookSelected(book: Book) {
-    return this.selectedBook === book;
-  }
-
-  updateBook(newBook: Book) {
-    this.selectedBook = newBook;
-    this.books = this.books
-      .map(
-        book => book.id === newBook.id ? newBook : book);
+  goToBookDetails(book: Book) {
+    this.router.navigate(['/book', book.id]);
   }
 
   ngOnDestroy(): void {
