@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Book } from '../book';
 
 @Component({
@@ -9,4 +9,15 @@ import { Book } from '../book';
 export class BookDetailsComponent {
   @Input()
   book: Book;
+
+  @Output()
+  bookChange = new EventEmitter<Book>();
+
+  submit(newAuthor: string, newTitle: string) {
+    this.bookChange.emit({
+      ...this.book,
+      title: newTitle,
+      author: newAuthor
+    });
+  }
 }

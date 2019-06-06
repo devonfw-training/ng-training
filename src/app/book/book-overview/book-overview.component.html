@@ -23,7 +23,8 @@
     </div>
     <div class="col-sm-4">
       <app-book-details *ngIf="selectedBook"
-                        [book]="selectedBook"></app-book-details>
+                        [book]="selectedBook"
+                        (bookChange)="updateBook($event)"></app-book-details>
     </div>
   </div>
 </div>
