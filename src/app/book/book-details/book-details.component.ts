@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { Book } from '../book';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BookService } from '../services/book.service';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -11,26 +11,25 @@ import { Observable } from 'rxjs';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent {
-  // book: Book;
   book$: Observable<Book>;
   private currentBookId;
 
   constructor(
     route: ActivatedRoute,
+    private readonly router: Router,
     private readonly bookService: BookService) {
-    this.book$ = route.params
+    this.book$ = route.data
       .pipe(
-        map(params => +params.bookId),
-        switchMap(bookId => bookService.getOne(bookId)),
-        tap(book => this.currentBookId = book.id)
+        map(data => data.book),
+        tap(book => this.currentBookId = book && book.id)
       );
   }
 
   submit(newAuthor: string, newTitle: string) {
-    console.log({
+    this.bookService.saveOne({
       id: this.currentBookId,
       title: newTitle,
       author: newAuthor
-    });
+    }).subscribe(() => this.router.navigate(['/books']));
   }
 }

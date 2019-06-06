@@ -3,9 +3,10 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BookModule } from './book/book.module';
-import { RouterModule } from '@angular/router';
+import { ResolveEnd, ResolveStart, Router, RouterModule } from '@angular/router';
 import { BookOverviewComponent } from './book/book-overview/book-overview.component';
 import { BookDetailsComponent } from './book/book-details/book-details.component';
+import { BookDetailsResolver } from './book/services/book-details.resolver';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,10 @@ import { BookDetailsComponent } from './book/book-details/book-details.component
       },
       {
         path: 'book/:bookId',
-        component: BookDetailsComponent
+        component: BookDetailsComponent,
+        resolve: {
+          book: BookDetailsResolver
+        }
       }
     ])
   ],
@@ -34,4 +38,14 @@ import { BookDetailsComponent } from './book/book-details/book-details.component
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor(router: Router) {
+    router.events.subscribe(event => {
+      if (event instanceof ResolveStart) {
+        console.log('ResolveStart');
+      }
+      if (event instanceof ResolveEnd) {
+        console.log('ResolveEnd');
+      }
+    });
+  }
 }
