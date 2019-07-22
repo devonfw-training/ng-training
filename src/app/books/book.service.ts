@@ -16,7 +16,7 @@ export class BookService {
   }
 
   findAll(): Observable<Book[]> {
-    return Observable.create((observer: Observer<Book[]>) => {
+    return new Observable((observer: Observer<Book[]>) => {
       observer.next(cloneDeep(this.books));
       observer.complete();
     });
@@ -29,7 +29,7 @@ export class BookService {
       bookCopy = cloneDeep(originalBook);
     }
 
-    return Observable.create((observer: Observer<Book>) => {
+    return new Observable((observer: Observer<Book>) => {
       if (bookCopy) {
         observer.next(bookCopy);
         observer.complete();
