@@ -12,8 +12,8 @@ This repository contains https://angular.io[Angular] training materials:
 You need a Git client, the https://nodejs.org/[Node.js] and the https://github.com/angular/angular-cli[Angular CLI] to make use of the project seed.
 It is highly recommended to use the following versions:
 
-* Node.js 10.13.0
-* Angular CLI 7.0.5
+* Node.js 10.16.0
+* Angular CLI 8.0.4
 
 ==== Git
 Check if you have a Git client already installed:
@@ -34,8 +34,8 @@ Node.js versions on your machine. The windows version of nvm can be found https:
 Once https://github.com/creationix/nvm[nvm] installed, install the Node.js:
 
 ----
-nvm install 10.13.0
-nvm use 10.13.0
+nvm install 10.16.0
+nvm use 10.16.0
 ----
 
 ==== Angular CLI
@@ -43,13 +43,7 @@ nvm use 10.13.0
 Having https://www.npmjs.com/[npm] installed you can install https://github.com/angular/angular-cli[Angular CLI] like this:
 
 ----
-npm install -g @angular/cli@7.0.5
-----
-
-Set https://www.npmjs.com/[npm] as a package manager (https://yarnpkg.com[yarn] is the default):
-
-----
-ng config -g cli.packageManager npm
+npm install -g @angular/cli@8.0.4
 ----
 
 === Start from _Hello World!_
