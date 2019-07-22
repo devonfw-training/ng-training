@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Book} from '../book';
+
 import {assign} from 'lodash';
+
+import {Book} from '../book';
 import {BookService} from '../book.service';
 
 @Component({
@@ -40,5 +42,4 @@ export class BookOverviewComponent implements OnInit {
       }
     });
   }
-
 }

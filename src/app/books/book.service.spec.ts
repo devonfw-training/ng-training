@@ -30,7 +30,7 @@ describe('BookService', () => {
     // when
     service.findAll().subscribe({
       // then
-      next: function (books) {
+      next: (books: Book[]) => {
         expect(books).toBeDefined();
         expect(books.length).toBe(expectedNumberOfBooks);
       },
@@ -45,7 +45,7 @@ describe('BookService', () => {
     book.title = 'Test Title';
     // when
     service.save(book).subscribe({
-      next: function (savedBook: Book) {
+      next: (savedBook: Book) => {
         // then
         expect(savedBook).toBeDefined();
         expect(savedBook.authors).toBe('Test Author');
@@ -60,7 +60,7 @@ describe('BookService', () => {
     book.authors = 'Test Author';
     book.title = 'Test Title';
     service.save(book).subscribe({
-      next: function (savedBook: Book) {
+      next: (savedBook: Book) => {
         expect(savedBook).toBeDefined();
         // when
         service.findOne(savedBook.id).subscribe({
