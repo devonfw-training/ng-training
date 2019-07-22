@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { Book } from '../book';
-import { cloneDeep } from 'lodash';
-import { BookService } from '../book.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { NgForm, AbstractControl } from '@angular/forms';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractControl, NgForm} from '@angular/forms';
+
+import {Book} from '../book';
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-book-details',
@@ -11,10 +11,19 @@ import { NgForm, AbstractControl } from '@angular/forms';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit {
+
+  @ViewChild('bookForm', {static: true})
+  currentForm: NgForm;
+
   book: Book;
 
-  @ViewChild('bookForm')
-  currentForm: NgForm;
+  constructor(
+    private bookService: BookService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {
+    this.book = new Book();
+  }
 
   private static createErrorMessage(errorObject: { [key: string]: any }): string {
     if (errorObject) {
@@ -29,10 +38,6 @@ export class BookDetailsComponent implements OnInit {
         }
       }).join(' ');
     }
-  }
-
-  constructor(private bookService: BookService, private router: Router, private route: ActivatedRoute) {
-    this.book = new Book();
   }
 
   getErrorMessageOfField(fieldName: string): string {

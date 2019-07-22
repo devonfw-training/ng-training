@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+
 import {Book} from '../book';
-import {assign} from 'lodash';
-import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-book-overview',
@@ -11,7 +11,10 @@ import {Router, ActivatedRoute} from '@angular/router';
 export class BookOverviewComponent implements OnInit {
   public books: Book[];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {
     this.books = [];
   }
 
@@ -20,9 +23,8 @@ export class BookOverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe((data: {books: Book[]}) => {
+    this.activatedRoute.data.subscribe((data: { books: Book[] }) => {
       this.books = data.books;
     });
   }
-
 }
