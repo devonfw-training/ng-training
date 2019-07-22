@@ -1,7 +1,8 @@
-import { TestBed } from '@angular/core/testing';
-import { BookService } from './book.service';
-import { Book } from './book';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {TestBed} from '@angular/core/testing';
+import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+
+import {BookService} from './book.service';
+import {Book} from './book';
 
 describe('BookService', () => {
 
@@ -35,7 +36,7 @@ describe('BookService', () => {
 
     // when
     bookService.findAll().subscribe({
-      next: function (books) {
+      next: (books: Book[]) => {
         // then
         expect(books).toBeDefined();
         expect(books.length).toBe(2);

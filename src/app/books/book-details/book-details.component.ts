@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { Book } from '../book';
-import { cloneDeep } from 'lodash';
-import { BookService } from '../book.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {AbstractControl, FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import {Book} from '../book';
+import {BookService} from '../book.service';
 
 @Component({
   selector: 'app-book-details',
@@ -11,11 +11,19 @@ import { AbstractControl, FormGroup, FormBuilder, Validators } from '@angular/fo
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit {
+
   book: Book;
-
   bookForm: FormGroup;
-
   submitted: boolean;
+
+  constructor(private formBuilder: FormBuilder,
+              private bookService: BookService,
+              private router: Router,
+              private route: ActivatedRoute
+  ) {
+    this.book = new Book();
+    this.submitted = false;
+  }
 
   private static createErrorMessage(errorObject: { [key: string]: any }): string {
     if (errorObject) {
@@ -30,15 +38,6 @@ export class BookDetailsComponent implements OnInit {
         }
       }).join(' ');
     }
-  }
-
-  constructor(private formBuilder: FormBuilder,
-    private bookService: BookService,
-    private router: Router,
-    private route: ActivatedRoute
-  ) {
-    this.book = new Book();
-    this.submitted = false;
   }
 
   getErrorMessageOfField(fieldName: string): string {
@@ -70,11 +69,11 @@ export class BookDetailsComponent implements OnInit {
       }
     });
 
-    this.bookForm.controls['authors'].valueChanges.subscribe(value => {
+    this.bookForm.get('authors').valueChanges.subscribe(value => {
       this.book.authors = value;
     });
 
-    this.bookForm.controls['title'].valueChanges.subscribe(value => {
+    this.bookForm.get('title').valueChanges.subscribe(value => {
       this.book.title = value;
     });
   }
